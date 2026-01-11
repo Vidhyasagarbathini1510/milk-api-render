@@ -1,16 +1,17 @@
 <?php
-$host = "localhost";
-$user = "root";       // change if hosting
-$pass = "Chintu@123";           // change if hosting
-$db   = "milk_db";
+$host = getenv("MYSQL_HOST");
+$port = getenv("MYSQL_PORT");
+$user = getenv("MYSQL_USER");
+$pass = getenv("MYSQL_PASSWORD");
+$db   = getenv("MYSQL_DATABASE");
 
-$conn = mysqli_connect($host, $user, $pass, $db);
+$conn = mysqli_connect($host, $user, $pass, $db, $port);
 
 if (!$conn) {
-    echo json_encode([
+    die(json_encode([
         "status" => false,
-        "message" => "Database connection failed"
-    ]);
-    exit;
+        "message" => "Database connection failed",
+        "error" => mysqli_connect_error()
+    ]));
 }
 ?>
