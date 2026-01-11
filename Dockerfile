@@ -1,12 +1,13 @@
 FROM php:8.2-apache
 
-# Install mysqli
 RUN docker-php-ext-install mysqli
 
-# Copy ALL files to Apache root
 COPY . /var/www/html/
 
-# Permissions (safe)
 RUN chown -R www-data:www-data /var/www/html
 
+# Railway requires this
+ENV PORT=80
 EXPOSE 80
+
+CMD ["apache2-foreground"]
