@@ -6,4 +6,5 @@ COPY . /var/www/html/
 
 RUN chown -R www-data:www-data /var/www/html
 
+ENV PORT=80
 EXPOSE 80
